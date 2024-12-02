@@ -64,6 +64,7 @@ export default function Login() {
       });
       return;
     }
+    console.log(form.agree);
     if (!form.agree) {
       formDispatch({
         type: "SET_ERROR",
@@ -72,7 +73,7 @@ export default function Login() {
       return;
     }
 
-    if (!form.isSubmit) return;
+    if (form.isSubmit) return;
     formDispatch({
       type: "SET_ERROR",
       error: "",
@@ -134,6 +135,7 @@ export default function Login() {
               <Button
                 type="button"
                 className="w-full border border-[#4f4f4f] text-[#4f4f4f] rounded-lg"
+                disabled={form.isSubmit}
               >
                 Go To Sing up
               </Button>
