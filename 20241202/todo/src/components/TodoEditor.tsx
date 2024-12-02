@@ -14,6 +14,7 @@ export default function TodoEditor({ onAdd }: Props) {
   };
 
   const handleKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) return;
     if (e.key === "Enter" || e.code === "Enter") handleAdd();
   };
 

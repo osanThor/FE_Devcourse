@@ -8,7 +8,19 @@ export default function Todo() {
   const [todos, setTodos] = useState<TodoItem[]>([]);
 
   const handleAddTodo = (value: string) => {
-    setTodos((prev) => [...prev, { value }]);
+    setTodos((prev) => [...prev, { value, checked: false }]);
+  };
+
+  const handleChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    idx: number
+  ) => {
+    const target = todos[idx];
+    setTodos((prev) => {
+      const newArr = [...prev];
+      newArr.splice(idx, 1, { ...target, checked: e.target.checked });
+      return newArr;
+    });
   };
 
   const handleDeleteTodo = (idx: number) => {
@@ -20,7 +32,11 @@ export default function Todo() {
     <div className="max-w-md mx-auto shadow-lg rounded-lg overflow-hidden">
       <TodoHeader />
       <TodoEditor onAdd={handleAddTodo} />
-      <TodoList todos={todos} onDelete={handleDeleteTodo} />
+      <TodoList
+        todos={todos}
+        onChange={handleChangeInput}
+        onDelete={handleDeleteTodo}
+      />
     </div>
   );
 }
